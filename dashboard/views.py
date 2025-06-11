@@ -284,7 +284,8 @@ def books(request):
 
 def delete_homework(request, pk=None):
     Homework.objects.get(id=pk).delete()
-    if 'profile' in request.META['HTTP_REFERER']:
+    referer = request.META.get('HTTP_REFERER', '')
+    if 'profile' in referer:
         return redirect('profile')
     return redirect('homework')
 
@@ -296,7 +297,8 @@ def update_homework(request, pk=None):
     else:
         homework.is_finished = True
     homework.save()
-    if 'profile' in request.META['HTTP_REFERER']:
+    referer = request.META.get('HTTP_REFERER', '')
+    if 'profile' in referer:
         return redirect('profile')
     return redirect('homework')
 
@@ -308,7 +310,8 @@ def delete_note(request, pk=None):
 
 def delete_todo(request, pk=None):
     Todo.objects.get(id=pk).delete()
-    if 'profile' in request.META['HTTP_REFERER']:
+    referer = request.META.get('HTTP_REFERER', '')
+    if 'profile' in referer:
         return redirect('profile')
     return redirect('todo')
 
@@ -320,7 +323,8 @@ def update_todo(request, pk=None):
     else:
         todo.is_finished = True
     todo.save()
-    if 'profile' in request.META['HTTP_REFERER']:
+    referer = request.META.get('HTTP_REFERER', '')
+    if 'profile' in referer:
         return redirect('profile')
     return redirect('todo')
 
