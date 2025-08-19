@@ -134,7 +134,7 @@ def dictionary(request):
         form = DashboardForm(request.POST)
 
         url = "https://api.dictionaryapi.dev/api/v2/entries/en_US/"+text
-        r = requests.get(url)
+        r = requests.get(url, timeout=60)
         answer = r.json()
         try:
             phonetics = answer[0]['phonetics'][0]['text']
@@ -256,7 +256,7 @@ def books(request):
         text = request.POST['text']
         form = DashboardForm(request.POST)
         url = "https://www.googleapis.com/books/v1/volumes?q="+text
-        r = requests.get(url)
+        r = requests.get(url, timeout=60)
         answer = r.json()
         result_list = []
         for i in range(10):
